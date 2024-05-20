@@ -178,9 +178,3 @@ where RoomTypeCodes not in ('PM', 'PF') and propertyname in ('Vinpearl Resort & 
 
 select distinct channels from final1
 --where channels is not null
-
-
-
-
-
-
