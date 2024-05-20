@@ -334,7 +334,7 @@ select * from vinpearl)
   where true)
 
 ,final2 as (
-select distinct * except(short_nation, hotelname),
+select distinct final1.* except(hotelname),
          case when short_nation = "01. VN" then "Vietnam"
               when short_nation = "04. Hàn" then "Korea"
               when short_nation in ("08. Úc&Nz" , "09. Mỹ&Canada") then "Úc/Mỹ/Canada/Nz"
@@ -347,7 +347,8 @@ select distinct * except(short_nation, hotelname),
             when hotelname ="빈펄 리조트&골프 남호이안" then "Vinpearl Resort & Golf Nam Hội An"
             when hotelname ="빈펄 리조트 & 스파 나트랑 베이" then "Vinpearl Resort & Spa Nha Trang Bay"
             else hotelname 
-          end as hotelname
+          end as hotelname,
+          nat_code.* except(short_nation, nationality)
 
 from final1
 left join `vp-dwh-prod-c827.MAPPING.NATION_CODE` nat_code on final1.nationality = nat_code.nation_code)
