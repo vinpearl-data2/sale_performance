@@ -1,0 +1,6 @@
+.ipynb_checkpoints
+target/
+dbt_packages/
+logs/
+/.user.yml
+vpt_dbt/
