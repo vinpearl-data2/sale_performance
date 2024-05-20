@@ -1,3 +1,9 @@
+{{
+  config(
+    materialized='table'
+  )
+}}
+
 with tour as(
 select distinct date(createddate,'Asia/Ho_Chi_Minh') bookingdate,
                                   ordercode,

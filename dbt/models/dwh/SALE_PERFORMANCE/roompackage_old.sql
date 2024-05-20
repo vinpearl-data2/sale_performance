@@ -1,6 +1,8 @@
-
-
-
+{{
+  config(
+    materialized='table'
+  )
+}}
 
 with a as (
 select * except(sourcecode,detected, propertyname),

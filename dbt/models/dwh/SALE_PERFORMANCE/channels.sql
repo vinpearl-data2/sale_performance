@@ -1,5 +1,8 @@
-
-
+{{
+  config(
+    materialized='table'
+  )
+}}
 
 with crs as 
  (select date(booking_date) BookingDate,

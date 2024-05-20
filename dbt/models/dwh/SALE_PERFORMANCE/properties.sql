@@ -1,3 +1,8 @@
+{{
+  config(
+    materialized='table'
+  )
+}}
 
 with tbl_new_ta_com AS (
         WITH tbl_ta_com AS (

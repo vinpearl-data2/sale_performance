@@ -32,18 +32,15 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  upsell:
     # Config indicated by + and applies to all files under models/example/
     dwh:
       project: "{{ 'vp-dwh-prod-c827' if target.name == 'prod' else 'vp-dwh-dev-d963' }}"
+      SALE_PERFORMANCE:
         materialized: table
         dataset: SALE_PERFORMANCE
 
 on-run-start:
-  # - '{{ format_email() }}'
-  # - '{{ format_phone() }}'
-  # - '{{ format_campaign() }}'
-  # - '{{ get_language() }}'
+  # - '{{ normalize_string() }}'
 
 
 vars:

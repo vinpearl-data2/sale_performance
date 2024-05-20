@@ -1,3 +1,9 @@
+{{
+  config(
+    materialized='table'
+  )
+}}
+
 WITH
 O AS( -- Build OTB raw DATA FOR Report
   SELECT BUSINESS_DATE,RESORT,CONSIDERED_DATE DATE,SERVER,
