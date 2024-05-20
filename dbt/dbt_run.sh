@@ -3,4 +3,4 @@ set -e
 conda activate dbt2
 cd /home/liendtm/workplace/git_hub/sale_performance/dbt
 git pull
-dbt run --profiles-dir . --target prod --models dwh.SALE_PERFORMANCE.revenue_tracking
+dbt run --profiles-dir . --target prod
