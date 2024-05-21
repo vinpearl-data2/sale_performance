@@ -42,13 +42,12 @@ with crs as
        CancelPenaltyPercent CancelPenaltyPercent
 
 from `vp-dwh-prod-c827.CIRRUS.res_booking__reservation`  
-where organization not like '%melia%'  )
-
+where organization not like '%melia%'
+)
 
 ,final as (
-select * except(roomtypenames, propertyname),
-         case when distributionchannel in ("AGODA", 
-        "BCOM", 'BOOKING.COM',"CTRIP",'CTRIP_B2C',"EXPEDIA", "HOTELSCOMBINED","KLOOK_B2C",'KLOOK B2C', "PRESTIGIA","TIKET.COM",'TIKET_COM', "TRAVELOKA","HOTELBEDS_B2C", 'HOTELBEDS B2C',"INTERPARK","TIDESQUARE",'TIDESQUARE - OTA', 'DIVA TRAVEL', 'HBD') then "OTAs"
+  select * except(roomtypenames, propertyname),
+         case when distributionchannel in ("AGODA", "BCOM", 'BOOKING.COM',"CTRIP",'CTRIP_B2C',"EXPEDIA", "HOTELSCOMBINED","KLOOK_B2C",'KLOOK B2C', "PRESTIGIA","TIKET.COM",'TIKET_COM', "TRAVELOKA","HOTELBEDS_B2C", 'HOTELBEDS B2C',"INTERPARK","TIDESQUARE",'TIDESQUARE - OTA', 'DIVA TRAVEL', 'HBD') then "OTAs"
               --when sourcecode = "DR" then 'DIRECT'
               when distributionchannel = "WEBSITE" then 'WEBSITE/APP'
               when distributionchannel in ('RESERVATION', 'FRONT OFFICE') then 'DIRECT'
@@ -57,9 +56,8 @@ select * except(roomtypenames, propertyname),
               when distributionchannel = "OWNER" then 'CBT'
               when distributionchannel = "VINPEARL – B2B" then 'VP TRAVEL'
               when distributionchannel = "VPT_BUNDLE" then 'VPT BUNDLE'
-
               else 'TA'
-              end as Channels,
+         end as Channels,
             
          case when propertyname like "%Phú Quốc%" then 'Phú Quốc'
               when propertyname like '%Nha Trang%' then 'Nha Trang'
@@ -77,7 +75,7 @@ select * except(roomtypenames, propertyname),
               when propertyname like '%Huế%' then 'Huế'
               when propertyname like '%Landmark%' then 'Tp HCM'
               when propertyname like '%Quảng Bình%' then 'Quảng Bình'
-              end as destination,
+         end as destination,
 
     --       case
     --       when detected in ('Brunei Darussalam','Cambodia', 'Indonesia',"Lao People's Democratic Republic",'Malaysia','Myanmar','Philippines','Singapore','Thailand') then 'ASEAN'
@@ -118,20 +116,21 @@ select * except(roomtypenames, propertyname),
           when propertyname = 'Vinpearl Wonderworld Phú Quốc' then 'Vinpearl Discovery Wonderworld Phú Quốc'
           when propertyname = 'Vinpearl Nha Trang Resort' then 'Vinpearl Resort Nha Trang'
           when propertyname = 'VinHolidays 1 Phú Quốc' then 'VinHolidays Fiesta Phú Quốc'
+          when propertyname in ('StayNFun Ocean Park 2','Stay And Fun Ocean Park 2') then 'Stay And Fun Ocean Park'
           else propertyname
      end as propertyname,
 
  CASE
     WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"(VILLA)|(BIỆT THỰ)") THEN 
-    ( CASE
-      WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"2\s*-*\s*BED|2\s*-*\s*bed|2\s*-*\s*Bed") THEN "VILLA 2 BED"
-      WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"3\s*-*\s*BED|3\s*-*\s*bed|3\s*-*\s*Bed") THEN "VILLA 3 BED"
-      WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"4\s*-*\s*BED|4\s*-*\s*bed|4\s*-*\s*Bed") THEN "VILLA 4 BED"
-      WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"5\s*-*\s*BED|5\s*-*\s*bed|2\s*-*\s*Bed") THEN "VILLA 5 BED"
-    ELSE
-    "VILLA"
-   END
-    )
+      (CASE
+        WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"2\s*-*\s*BED|2\s*-*\s*bed|2\s*-*\s*Bed") THEN "VILLA 2 BED"
+        WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"3\s*-*\s*BED|3\s*-*\s*bed|3\s*-*\s*Bed") THEN "VILLA 3 BED"
+        WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"4\s*-*\s*BED|4\s*-*\s*bed|4\s*-*\s*Bed") THEN "VILLA 4 BED"
+        WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"5\s*-*\s*BED|5\s*-*\s*bed|2\s*-*\s*Bed") THEN "VILLA 5 BED"
+      ELSE
+      "VILLA"
+    END
+      )
     WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"DELUXE|GRAND|deluxe|Deluxe|grand") THEN "DELUXE"
     WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"DUPLEX|duplex|Duplex") THEN "SUITE"
     WHEN REGEXP_CONTAINS(`vp-dwh-prod-c827.UP_CROSS_SELL.normalize_string`(roomtypenames), r"STUDIO|Studio|studio") THEN "STUDIO"
@@ -148,36 +147,34 @@ select * except(roomtypenames, propertyname),
   ELSE
   'DELUXE'
 END AS roomtype
-   from crs)
+   from crs
+)
 
 ,final1 as (
-select * except (detected), case when detected in ('Viet Nam', 'VI', 'Vietnamese', 'VN', 'Vietnam', 'Việt Nam', 'vi') then 'Vietnam'
-                                 when detected in ('KR','South Korea','kr','South Korean') then 'South Korea'
-                                 when detected in ('US', 'CA','AU') then 'USA-Canada-Aus'
-                                 when detected is null or detected = '' then null
-                                 else 'Others'
-                                 end as detected
-from final
-where RoomTypeCodes not in ('PM', 'PF') and propertyname in ('Vinpearl Resort & Spa Đà Nẵng',
-'Vinpearl Resort & Spa Hội An',
-'VinHolidays Fiesta Phú Quốc',
-'Vinpearl Luxury Nha Trang',
-'VinOasis Phú Quốc',
-'Vinpearl Condotel Beachfront Nha Trang',
-'Vinpearl Discovery Wonderworld Phú Quốc',
-'Vinpearl Discovery Sealink Nha Trang',
-'Vinpearl Discovery Golflink Nha Trang',
-'Vinpearl Resort & Spa Hạ Long',
-'Vinpearl Resort Nha Trang',
-'Vinpearl Resort & Spa Nha Trang Bay',
-'Vinpearl Resort & Golf Nam Hội An',
-'Vinpearl Resort & Spa Phú Quốc'))
-
---select * from final1
---where distributionchannel like '%B2B%'
---where channels = 'TA'
-
-
-
+  select * except (detected), 
+        case when detected in ('Viet Nam', 'VI', 'Vietnamese', 'VN', 'Vietnam', 'Việt Nam', 'vi') then 'Vietnam'
+            when detected in ('KR','South Korea','kr','South Korean') then 'South Korea'
+            when detected in ('US', 'CA','AU') then 'USA-Canada-Aus'
+            when detected is null or detected = '' then null
+            else 'Others'
+        end as detected
+  from final
+  where RoomTypeCodes not in ('PM', 'PF') 
+  and propertyname in ('Vinpearl Resort & Spa Đà Nẵng',
+                      'Vinpearl Resort & Spa Hội An',
+                      'VinHolidays Fiesta Phú Quốc',
+                      'Vinpearl Luxury Nha Trang',
+                      'VinOasis Phú Quốc',
+                      'Vinpearl Condotel Beachfront Nha Trang',
+                      'Vinpearl Discovery Wonderworld Phú Quốc',
+                      'Vinpearl Discovery Sealink Nha Trang',
+                      'Vinpearl Discovery Golflink Nha Trang',
+                      'Vinpearl Resort & Spa Hạ Long',
+                      'Vinpearl Resort Nha Trang',
+                      'Vinpearl Resort & Spa Nha Trang Bay',
+                      'Vinpearl Resort & Golf Nam Hội An',
+                      'Vinpearl Resort & Spa Phú Quốc',
+                      'Stay And Fun Ocean Park'
+                      )
+)
 select distinct channels from final1
---where channels is not null
