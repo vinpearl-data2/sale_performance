@@ -34,7 +34,7 @@ with property as (
   union all
   select 'Vinpearl Resort & Spa Phú Quốc' as propertyname
   union all
-  select 'Hòn Tằm Resort' as propertyname
+  select 'Hòn Tằm Resort Nha Trang' as propertyname
   union all
   select 'StayNFun Ocean Park 2' as propertyname
 )
