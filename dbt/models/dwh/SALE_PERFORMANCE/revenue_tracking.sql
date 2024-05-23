@@ -366,7 +366,7 @@ select distinct *
           when regexp_contains(hotelname, r'Resort và Spa Phú Quốc|Resort & Spa Phú Quốc|Resort & Spa Phu Quoc|Resort and Spa Phú Quốc') then 'Vinpearl Resort & Spa Phú Quốc' 
           when regexp_contains(hotelname, r'Resort Nha Trang|Nha Trang Resort') then 'Vinpearl Resort Nha Trang' 
           when regexp_contains(hotelname, r'Wonderworld') then 'Vinpearl Wonderworld Phú Quốc' 
-          else null
+          else hotelname
     end as hotelname
   )
 from final2
