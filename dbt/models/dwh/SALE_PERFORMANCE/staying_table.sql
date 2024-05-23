@@ -567,7 +567,7 @@ select * ,
             when property_name like '%Hội An%' then 'Hội An'
             when property_name like '%Hạ Long%' then 'Hạ Long'
             when property_name like '%Phú Quốc%' then 'Phú Quốc'
-
+            when property_name = 'StayNFun Ocean Park 2' then 'Hà Nội'
             end as destination
 
 from final1
