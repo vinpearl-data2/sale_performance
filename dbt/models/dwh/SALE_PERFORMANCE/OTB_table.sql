@@ -136,7 +136,7 @@ with crs_ref as (
           when propertyname = 'Vinpearl Nha Trang Resort' then 'Vinpearl Resort Nha Trang'
           when propertyname = 'VinHolidays 1 Phú Quốc' then 'VinHolidays Fiesta Phú Quốc'
           when propertyname = 'Hòn Tằm Nha Trang' then 'Hòn Tằm Resort'
-          when regexp_contains(propertyname, r'Stay And Fun Ocean Park|StayNFun Ocean Park') then 'Stay And Fun Ocean Park'
+          when regexp_contains(propertyname, r'Stay And Fun Ocean Park|StayNFun Ocean Park') then 'StayNFun Ocean Park 2'
           else propertyname
     end as propertyname,
     lower(roomtypenames) roomtype,
