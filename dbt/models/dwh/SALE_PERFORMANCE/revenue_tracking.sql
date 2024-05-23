@@ -353,4 +353,20 @@ select distinct final1.* except(hotelname),
 from final1
 left join `vp-dwh-prod-c827.MAPPING.NATION_CODE` nat_code on final1.nationality = nat_code.nation_code)
 
-select distinct * from final2
+select distinct * 
+  replace (
+    case  when regexp_contains(hotelname, r'Hòn Tằm') then 'Hòn Tằm Resort Nha Trang'
+          when regexp_contains(hotelname, r'Stay And Fun Ocean Park|StayNFun Ocean Park') then 'StayNFun Ocean Park 2' 
+          when regexp_contains(hotelname, r'VinHolidays') then 'VinHolidays Fiesta Phú Quốc'
+          when regexp_contains(hotelname, r'Beachfront Nha Trang') then 'Vinpearl Beachfront Nha Trang' 
+          when regexp_contains(hotelname, r'Luxury Nha Trang') then 'Vinpearl Luxury Nha Trang'
+          when regexp_contains(hotelname, r'Resort & Golf Nam Hoi An|Resort & Golf Nam Hội An|Resort và Golf Nam Hội An|Resort and Golf Nam Hoi An|Resort & Spa Hội An') then 'Vinpearl Resort & Golf Nam Hội An' 
+          when regexp_contains(hotelname, r'Resort và Spa Hạ Long|Resort & Spa Hạ Long|Resort and Spa Ha Long|Resort & Spa Ha Long') then 'Vinpearl Resort & Spa Hạ Long' 
+          when regexp_contains(hotelname, r'Nha Trang Bay') then 'Vinpearl Resort & Spa Nha Trang Bay' 
+          when regexp_contains(hotelname, r'Resort và Spa Phú Quốc|Resort & Spa Phú Quốc|Resort & Spa Phu Quoc|Resort and Spa Phú Quốc') then 'Vinpearl Resort & Spa Phú Quốc' 
+          when regexp_contains(hotelname, r'Resort Nha Trang|Nha Trang Resort') then 'Vinpearl Resort Nha Trang' 
+          when regexp_contains(hotelname, r'Wonderworld') then 'Vinpearl Wonderworld Phú Quốc' 
+          else null
+    end as hotelname
+  )
+from final2
