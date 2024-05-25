@@ -6,35 +6,25 @@
 
 -- dim property
 with property as (
-  select 'Vinpearl Resort & Spa Đà Nẵng' as propertyname
-  union all
-  select 'Vinpearl Resort & Spa Hội An' as propertyname
-  union all
-  select 'VinHolidays Fiesta Phú Quốc' as propertyname
+  select 'Hòn Tằm Resort Nha Trang' as propertyname
   union all
   select 'Vinpearl Luxury Nha Trang' as propertyname
   union all
-  select 'VinOasis Phú Quốc' as propertyname
-  union all
-  select 'Vinpearl Beachfront Nha Trang' as propertyname
-  union all
-  select 'Vinpearl Wonderworld Phú Quốc' as propertyname
-  union all
-  select 'Vinpearl Sealink Nha Trang' as propertyname
-  union all
-  select 'Vinpearl Golflink Nha Trang' as propertyname
-  union all
-  select 'Vinpearl Resort & Spa Hạ Long' as propertyname
+  select 'Vinpearl Resort & Spa Nha Trang Bay' as propertyname
   union all
   select 'Vinpearl Resort Nha Trang' as propertyname
   union all
-  select 'Vinpearl Resort & Spa Nha Trang Bay' as propertyname
+  select 'VinHolidays Fiesta Phú Quốc' as propertyname
   union all
-  select 'Vinpearl Resort & Golf Nam Hội An' as propertyname
+  select 'Vinpearl Beachfront Nha Trang' as propertyname
   union all
   select 'Vinpearl Resort & Spa Phú Quốc' as propertyname
   union all
-  select 'Hòn Tằm Resort Nha Trang' as propertyname
+  select 'Vinpearl Resort & Spa Hạ Long' as propertyname
+  union all
+  select 'Vinpearl Resort & Golf Nam Hội An' as propertyname
+  union all
+  select 'Vinpearl Wonderworld Phú Quốc' as propertyname
   union all
   select 'StayNFun Ocean Park 2' as propertyname
 )
@@ -42,8 +32,6 @@ with property as (
 select 
   propertyname,
   case when propertyname like '%Nha Trang%' then 'Nha Trang'
-       when propertyname like '%Đà Nẵng%' then 'Đà Nẵng'
-       when propertyname like '%Hội An%' then 'Hội An'
        when propertyname like '%Phú Quốc%' then 'Phú Quốc'
        when propertyname like '%Hạ Long%' then 'Hạ Long'
        when propertyname like '%Hòn Tằm%' then 'Nha Trang'
