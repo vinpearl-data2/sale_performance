@@ -164,6 +164,7 @@ select distinct
   order_code,
   Channels,
   case when propertyname like '%Nha Trang%' then 'Nha Trang'
+       when propertyname like '%Hội An%' then 'Hội An'
        when propertyname like '%Phú Quốc%' then 'Phú Quốc'
        when propertyname like '%Hạ Long%' then 'Hạ Long'
        when propertyname like '%Hòn Tằm%' then 'Nha Trang'
