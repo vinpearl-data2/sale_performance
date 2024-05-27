@@ -348,7 +348,10 @@ select distinct final1.* except(hotelname),
             when hotelname ="빈펄 리조트 & 스파 나트랑 베이" then "Vinpearl Resort & Spa Nha Trang Bay"
             else hotelname 
           end as hotelname,
-          nat_code.* except(short_nation, nationality)
+          nat_code.NATION_GROUP_CODE,
+          nat_code.NATION_GROUP,
+          nat_code.NATION_CODE,
+          nat_code.NATIONALITY as NATIONALITY_DETAIL
 
 from final1
 left join `vp-dwh-prod-c827.MAPPING.NATION_CODE` nat_code on final1.nationality = nat_code.nation_code)
