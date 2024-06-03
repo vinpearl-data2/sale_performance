@@ -20,7 +20,7 @@ with kpi as (
         else null
     end as PropertyName
   )
-  from `vp-dwh-prod-c827.VINPEARL_TRAVEL.VIN3S_DM_VP_RATE_PLAN_CODES`
+  from `vp-dwh-prod-c827.VIN3S_DATATMART_VINPEARL.RATE_PLAN_CODES`
 )
 
 select *

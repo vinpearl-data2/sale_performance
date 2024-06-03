@@ -25,7 +25,7 @@ with kpi as (
          when regexp_contains(PropertyCode, r'Stay And Fun|StayNFun') then 'Region 3' -- cái này chưa có confirm
     end as Custom
 
-  from `vp-dwh-prod-c827.VINPEARL_TRAVEL.VIN3S_DM_VP_MONTHLY_KPI`
+  from `vp-dwh-prod-c827.VIN3S_DATATMART_VINPEARL.MONTHLY_KPI`
 )
 
 select *
