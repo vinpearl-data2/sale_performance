@@ -122,7 +122,7 @@ with crs_ref as (
   left join `vp-dwh-prod-c827.MAPPING.NATION_CODE` nat_code on crs.detected = nat_code.nation_code
   left join (
     select distinct rateplancodes, groupcode 
-    from `vp-dwh-prod-c827.VINPEARL_TRAVEL.VIN3S_DM_VP_RATE_PLAN_CODES`
+    from `vp-dwh-prod-c827.VIN3S_DATATMART_VINPEARL.RATE_PLAN_CODES`
   ) code on crs.RatePlanCodes = code.rateplancodes
   where propertyname is not null
 )
