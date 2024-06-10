@@ -367,7 +367,7 @@ left join `vp-dwh-prod-c827.MAPPING.NATION_CODE` nat_code on final1.nationality 
 select distinct * 
   replace (
     case  when regexp_contains(hotelname, r'Hòn Tằm') then 'Hòn Tằm Resort Nha Trang'
-          when regexp_contains(hotelname, r'Stay And Fun Ocean Park|StayNFun Ocean Park') then 'StayNFun Ocean Park 2' 
+          when regexp_contains(lower(hotelname), r'stay And Fun|staynfun') then 'StayNFun Ocean Park 2' 
           when regexp_contains(hotelname, r'VinHolidays') then 'VinHolidays Fiesta Phú Quốc'
           when regexp_contains(hotelname, r'Beachfront Nha Trang') then 'Vinpearl Beachfront Nha Trang' 
           when regexp_contains(hotelname, r'Luxury Nha Trang') then 'Vinpearl Luxury Nha Trang'
