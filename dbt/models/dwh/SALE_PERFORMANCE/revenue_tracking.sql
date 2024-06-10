@@ -257,7 +257,15 @@ select distinct date(createddate,'Asia/Ho_Chi_Minh') bookingdate,
                                                    else groupcode
                                                    end as groupname,
 
-from `vp-data-lake-prod-c827.VINPEARL_TRAVEL.REPORT_ORDERHOTELREPORTS` hotelreport
+from (
+  select *
+  from `vp-data-lake-prod-c827.VINPEARL_TRAVEL.REPORT_ORDERHOTELREPORTS`
+  union all
+  (select *
+  from `vp-dwh-prod-c827.VINPEARL_TRAVEL.ORDER_HOTEL_REPORT_COOK`
+  where bookingID like 'SNF%'
+  )
+) hotelreport
 left join `vp-dwh-prod-c827.VINPEARL_TRAVEL.VIN3S_DM_VP_RATE_PLAN_CODES` code on hotelreport.rateplancode = code.RatePlanCodes
 where date(createddate) >= "2023-01-01" and paymentstatus = 2)
 
