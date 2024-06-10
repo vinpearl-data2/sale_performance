@@ -77,7 +77,7 @@ with crs_ref as (
 
 , crs_property as (
   select * except (propertyName, detected),
-    case when distributionchannel in ("AGODA", "BCOM", 'BOOKING.COM',"CTRIP",'CTRIP_B2C',"EXPEDIA", "HOTELSCOMBINED","KLOOK_B2C",'KLOOK B2C', "PRESTIGIA","TIKET.COM",'TIKET_COM', "TRAVELOKA","INTERPARK","TIDESQUARE",'TIDESQUARE - OTA', 'DIDA TRAVEL', 'HBD', 'MAKEMYTRIP B2C') then "OTAs"
+    case when distributionchannel in ("AGODA", "BCOM", 'BOOKING.COM',"CTRIP",'CTRIP_B2C',"EXPEDIA", "HOTELSCOMBINED","KLOOK_B2C",'KLOOK B2C', "PRESTIGIA","TIKET.COM",'TIKET_COM', "TRAVELOKA","INTERPARK","TIDESQUARE",'TIDESQUARE - OTA', 'DIDA TRAVEL', 'HBD', 'MAKEMYTRIP B2C', 'DIDA TRAVEL B2C') then "OTAs"
         when distributionchannel = "WEBSITE" then 'WEBSITE/APP'
         when distributionchannel in ('RESERVATION', 'FRONT OFFICE') then 'DIRECT'
         when distributionchannel in ('VINGROUP P&L', 'VINPEARL JSC') or distributionchannel like '%KHACH LE TAP DOAN%' then 'VINGROUP'
