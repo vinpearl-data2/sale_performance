@@ -41,7 +41,10 @@ PAYMENT as (
 ,final1 as (
   select distinct sale_date, 
                   order_code,
-                  coupon_code, 
+                  case when trim(coupon_code) = '' then null
+                       when coupon_code is null then null
+                       else coupon_code
+                  end as coupon_code, 
                   coupon_value, 
                   total_payment, 
                   sub_total, 
