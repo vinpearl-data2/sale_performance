@@ -256,6 +256,7 @@ select distinct date(createddate,'Asia/Ho_Chi_Minh') bookingdate,
                 case when rateplancodes in ('PR12108FB',  'PR12109FB', 'PR12108BB', 'PR12109FBB') then "FREE VINWONDERS" 
                                                    else groupcode
                                                    end as groupname,
+                row_number() over(partition by ordercode order by groupcode desc nulls last) rn
 
 from (
   select *
@@ -284,7 +285,8 @@ select distinct bookingdate,
 
 from hotelreport
 left join `vp-dwh-prod-c827.VINPEARL_TRAVEL.VIN3S_DM_VP_RATE_PLAN_CODES` code on hotelreport.rateplancode = code.RatePlanCodes
-Where groupname is null or groupname not in ("TABS", 'CBNV', 'Vinfast', 'VINFAST', 'DNMP')
+Where (groupname is null or groupname not in ("TABS", 'CBNV', 'Vinfast', 'VINFAST', 'DNMP'))
+and rn=1
 )
 
 
