@@ -263,7 +263,7 @@ from (
   from `vp-data-lake-prod-c827.VINPEARL_TRAVEL.REPORT_ORDERHOTELREPORTS`
   union all
   (select *
-  from `vp-dwh-prod-c827.VINPEARL_TRAVEL.ORDER_HOTEL_REPORT_COOK`
+  from {{ ref('ORDER_HOTEL_REPORT_COOK') }}
   where bookingID like 'SNF%'
   )
 ) hotelreport
